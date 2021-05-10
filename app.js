@@ -65,7 +65,7 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
 
 app.get('/', (req, res) => {
 
-    res.send("Landing Page");
+    res.render('home.ejs');
 });
 
 // seedDb();
