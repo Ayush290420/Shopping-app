@@ -10,7 +10,7 @@ router.get('/products', async(req, res) => {
         const products = await product.find({});
         res.render('products/index.ejs', { products });
     } catch (e) {
-        console.log("Something went wrong!!");
+        console.log(e.message);
         req.flash('error', 'Cannot find the products');
         res.redirect('/error');
     }
