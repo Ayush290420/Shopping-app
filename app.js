@@ -14,6 +14,18 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./models/user');
 
+
+//env key is used in place of connect url
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
+        console.log("Connected to database");
+    })
+    .catch(err => {
+        console.log("Erroe in db Connection");
+        console.log(err.message);
+    console.log(err.lineNumber);
+    console.log(err.fileName);
+    });
+
 //Routes
 const productRoute = require('./routes/product');
 const authRoute = require('./routes/auth');
@@ -53,16 +65,7 @@ app.use((req, res, next) => {
 });
 
 
-//env key is used in place of connect url
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
-        console.log("Connected to database");
-    })
-    .catch(err => {
-        console.log("Erroe in db Connection");
-        console.log(err.message);
-    console.log(err.lineNumber);
-    console.log(err.fileName);
-    });
+
 
 
 app.get('/', (req, res) => {
