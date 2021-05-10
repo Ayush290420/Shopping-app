@@ -60,6 +60,7 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
     .catch(err => {
         console.log("Erroe in db Connection");
         console.log(err.message);
+    console.log(err.lineNumber);
     });
 
 
