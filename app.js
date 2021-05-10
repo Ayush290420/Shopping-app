@@ -61,6 +61,7 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
         console.log("Erroe in db Connection");
         console.log(err.message);
     console.log(err.lineNumber);
+    console.log(err.fileName);
     });
 
 
