@@ -1,0 +1,21 @@
+.card img {
+    padding: 20px;
+    height: 220px;
+}
+
+.card-body {
+    text-align: center;
+    padding: 10px 10px;
+}
+
+.social-icons a {
+    padding: 5px;
+}
+
+a i {
+    width: 30px;
+}
+
+a i:hover {
+    transform: scale(2);
+}

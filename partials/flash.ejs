@@ -1,0 +1,15 @@
+<% if(success && success.length){ %>
+    <!-- if the success property exists and it has some value then only this pop up -->
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+
+        <% if(error && error.length){ %>
+            <!-- if the success property exists and it has some value then only this pop up -->
+            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                <%= error %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>

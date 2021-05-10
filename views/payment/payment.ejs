@@ -1,0 +1,45 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+        <div style="width: 50%;margin: 10px auto; padding-top: 3rem;">
+            <form class="validate" action="#" method="POST" novalidate>
+                <h5 class="display-5">Add Your Payment Info</h5>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" name="product[name]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="cardno" class="form-label">Card Number</label>
+                    <input type="number" class="form-control" id="cardno" placeholder="Enter 12 digit card number" name="cardno" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="number" class="form-control" id="cvv" placeholder="CVV" name="cvv" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Expiry Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Address</label>
+                    <textarea id="desc" cols="50" rows="2" name="product[desc]" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+
+        <%- include('../../partials/footer') %>

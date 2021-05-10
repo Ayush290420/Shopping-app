@@ -1,0 +1,37 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+        <div style="width: 50%;margin: 10px auto; padding-top: 3rem;">
+            <form class="validate" action="/products" method="POST" novalidate>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" name="product[name]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image Url</label>
+                    <input type="text" class="form-control" id="image" placeholder="URL" name="product[image]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Product Price in $</label>
+                    <input type="number" class="form-control" id="price" placeholder="price" name='product[price]' required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Description</label>
+                    <textarea id="desc" cols="30" rows="5" name="product[desc]" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <%- include('../../partials/footer') %>
