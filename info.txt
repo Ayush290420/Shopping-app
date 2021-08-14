@@ -1,0 +1,33 @@
+The user schema have usertype,email and cart. Both reatiler and customer have the cart.
+1.The product added by cutomers is added in cart ~For customers
+2.The product added by retailers is added to the cart~For reatilers
+
+
+As new option is only given to retailer so when a retialer add a priduct followingg happens:-
+1.In product schema the user id is saved .(In every product user_id of retailer who added  the  product is saved)
+2.The product is pushed into the cart array of reatailer.
+
+
+Cart
+1.In schema of user in the cart array contaians an object which further have pId[Product Id] and Quantity[number of the above product added]. In in showcart.ejs in is displayed by cart.pId.image, cart.pId.title etc.
+2.For removing a product from the cart we are sending the userid and the productid from showcart.ejs and inside cart.js  with the help of $pull removing the product from the cart array[  await User.findByIdAndUpdate(userid, { $pull: { cart: { pId: id } } });  ]
+
+3. Quantity is taken at show.ejs . And if that product is already present in the cart array then the quantity input is disabled. This is checked by a for-of-loop comparing the id of product (inside show.ejs) with eack product id inside currentUser cart.
+[**Note-The values for the variables above will be:
+compare1 = false, compare2 = false but compare3 = true;
+The reason why compare1 or compare2 variable returns false is that when comparing mongoose Object Id using the equal (=) sign, the comparison is done using an Object Reference, although user._id and address.userId contain the same value but the objects are not the same.
+To compare, it's safer we convert the two objects to a string using the String function in javascript as seen in compare3 above.
+Conclusion:
+For comparing mongoose object Id, it's safer you convert it to a string before comparing either using the String() function or .toString() method in javascript.]
+
+
+
+
+
+Retailer:
+bob , pass:bob
+tob  ,pass:tob
+
+Customer:
+hob ,pass:hob
+kob ,pass:kob

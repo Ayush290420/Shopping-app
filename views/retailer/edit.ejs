@@ -1,7 +1,7 @@
 <%- include('../../partials/header') %>
     <%- include('../../partials/navbar') %>
         <div style="width: 50%;margin: 10px auto; padding-top: 3rem;">
-            <form class="validate" action="/products/<%= editProduct._id%>?_method=PATCH" method="POST" novalidate>
+            <form class="validate" action="/retailer/<%= editProduct._id%>?_method=PATCH" method="POST" novalidate>
                 <div class="mb-3">
                     <label for="name" class="form-label">Product Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Name" name="product[name]" value="<%= editProduct.name %> " required>

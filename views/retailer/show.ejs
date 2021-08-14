@@ -1,0 +1,69 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+        <link rel="stylesheet" href="/css/star.css">
+        <div class="container">
+
+            <%- include('../../partials/flash') %>
+                <div class="row">
+                    <div class="col-lg-6 mt-2 mb-2 ">
+                        <div class="card shadow-lg" style="width: 25rem;">
+                            <img src="<%= oneProduct.image %> " class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= oneProduct.name %>
+                                </h5>
+                                <h5 class="card-title">$
+                                    <%= oneProduct.price %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= oneProduct.desc %>
+                                </p>
+
+
+                                <a href="/retailer/<%= oneProduct._id %>/edit " class="btn btn-warning">Edit</a>
+                                <div class="m-3 ">
+                                    <form action="/retailer/<%=oneProduct._id%>?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <h6 class="display-6">Reviews On Your Product</h6>
+                        <form class="validate" action="/products/<%=oneProduct._id%>/reviews" method="POST" novalidate>
+
+                            <% if(oneProduct.review.length==0){%>
+                                <div class="text-capitalize fw-light display-5 m-5" style="color: gray;">
+                                    No Reviews Found
+                                </div>
+                                <% }else{ %>
+                                    <%  for(let x of oneProduct.review){%>
+                                        <div class="card mt-3 text-start p-3 pb-1">
+
+
+                                            <p class="starability-result" data-rating="<%= x.rating%>">
+                                                Rated:
+                                                <%= x.rating%> stars
+                                            </p>
+                                            <div class="text-capitalize fw-light" style="color: gray;">
+                                                <strong>By <%= x.user %></strong>
+                                            </div>
+                                            <div class="card-body mb-3">
+
+                                                <p class="text-start">
+                                                    Review:
+                                                    <%= x.comment%>
+
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                        </p>
+                                        <% } %>
+                                            <% } %>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+        <%- include('../../partials/footer') %>

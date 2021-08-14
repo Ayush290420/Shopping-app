@@ -1,0 +1,6 @@
+*********************************************  9June 2022 ************************************************************************************
+Found user by the user_id of user[after login]. Passed the object to ejs file.
+[Todo: populate the cart the products and display the products ]
+
+*********************************************  20June 2022 ************************************************************************************
+[Todo:Tranfer the new product code to retailer routes.] 

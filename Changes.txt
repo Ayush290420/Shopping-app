@@ -1,0 +1,4 @@
+1. In user collection one more field is add "Usertype" .
+_amin is concatenated with the user anme of retailers.
+
+2. User profiling .

@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
 
+// const { userCheck } = require('../middleware');
 
 
 router.get('/register', (req, res) => {
@@ -11,7 +12,9 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async(req, res) => {
     try {
-        const user = new User({ username: req.body.username, email: req.body.email });
+
+        let user;
+        user = new User({ username: req.body.username, email: req.body.email, userType: req.body.userType, phoneNo: req.body.phoneNo });
         const newUser = await User.register(user, req.body.password);
 
         req.flash('success', 'Register Successfully');
@@ -31,9 +34,19 @@ router.post('/login',
         failureRedirect: '/login',
         failureFlash: true
     }), (req, res) => {
-        req.flash('success', `Welcome Back!!!${req.user.username}`);
 
-        res.redirect('/products');
+        if (req.user.userType === 'retailer') {
+
+            req.flash('success', `Welcome Back!!!`);
+            // res.redirect('/products');
+            res.redirect(`/retailer/${req.user.id}`); //@
+        } else {
+            req.flash('success', `Welcome Back!!!${req.user.username}`);
+            res.redirect('/');
+        }
+
+
+
     });
 
 router.get('/logout', (req, res) => {

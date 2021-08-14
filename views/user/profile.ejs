@@ -1,0 +1,58 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+        <%- include('../../partials/flash') %>
+            <h1 class="display-1 d-inline"> Profile</h1>
+            <div class="text-center">
+
+                <h3 class="text-capitalize ">
+                    <%= currentUser.username%>
+                </h3>
+            </div>
+            <div class="conatiner ">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <ul class="list-group text-center">
+                            <a href="/profile/details">
+                                <li class="list-group-item m-2">Change Details <i class="fas fa-info-circle"></i>
+                                </li>
+                            </a>
+                            <% if(currentUser.userType=="customer") {%>
+                                <a href="/user/<%=currentUser._id%>/cart ">
+                                    <li class="list-group-item m-2">My Cart <i class="fas fa-cart-arrow-down"></i></li>
+                                </a>
+                                <% }else{%>
+                                    <a href="/retailer/<%=currentUser._id%> ">
+                                        <li class="list-group-item m-2">Your Products <i class="fab fa-product-hunt"></i></li>
+                                    </a>
+                                    <% } %>
+                        </ul>
+                    </div>
+                    <div class="col-lg-8">
+                        <form style="width:80%;margin: auto; ">
+                            <div class="mb-3">
+                                <h3>Personal Information</h3>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">UserName</label>
+                                    <input type="text" class="form-control text-capitalize" id="username" value="<%= currentUser.username %>" placeholder="Username " disabled>
+
+
+                                </div>
+                                <div class="mb-3 ">
+                                    <label for="email " class="form-label ">Email</label>
+                                    <input type="email " class="form-control " id="email " placeholder="Email" value="<%= currentUser.email %> " disabled>
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phoneNo" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phoneNo" value="<%=currentUser.phoneNo%> " placeholder="Not Assigned" disabled>
+
+
+                                </div>
+
+
+                        </form>
+                        </div>
+                    </div>
+                </div>
+
+                <%- include('../../partials/footer') %>

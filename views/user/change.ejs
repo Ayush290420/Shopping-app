@@ -1,0 +1,38 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+        <%- include('../../partials/flash') %>
+            <form style="width: 50%;margin: 10px auto; padding-top: 1rem;" method="POST" action="/profile/<%= currentUser._id %>?_method=PATCH">
+                <div class="mb-3">
+                    <h3>Customer Details</h3>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">UserName</label>
+                        <input type="text" class="form-control text-capitalize" id="username" value="<%= currentUser.username %>" placeholder="Username " name="user[username]" required>
+
+                        <div class="valid-feedback ">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="email " class="form-label ">Email</label>
+                        <input type="email " class="form-control " id="email " placeholder="Email" value="<%= currentUser.email %> " name="user[email] " required>
+                        <div class="valid-feedback ">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNo" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phoneNo" value="<%=currentUser.phoneNo%> " placeholder="Optional" name='user[phoneNo]'>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="m-3">
+                            <input type="submit" class="btn-success">
+                        </div>
+
+                    </div>
+
+
+            </form>
+
+            <%- include('../../partials/footer') %>

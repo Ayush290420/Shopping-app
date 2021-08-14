@@ -19,7 +19,11 @@ const productSchema = new mongoose.Schema({
     review: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
-    }]
+    }],
+    retailer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const product = mongoose.model('Product', productSchema);

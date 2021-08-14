@@ -14,19 +14,32 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./models/user');
 
-//Routes
-const productRoute = require('./routes/product');
-const authRoute = require('./routes/auth');
-const cartRoute = require('./routes/cart');
 
 //env key is used in place of connect url
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
+mongoose.connect('mongodb://localhost:27017/shop-APP', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
         console.log("Connected to database");
     })
     .catch(err => {
         console.log("Erroe in db Connection");
         console.log(err.message);
+        console.log(err.lineNumber);
+        console.log(err.fileName);
     });
+
+//Routes
+const productRoute = require('./routes/product');
+const authRoute = require('./routes/auth');
+const cartRoute = require('./routes/cart');
+const retailerRoute = require('./routes/retailer') //@
+const profileRoute = require('./routes/profile') //@
+    //env key is used in place of connect url
+    // mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
+    //         console.log("Connected to database");
+    //     })
+    //     .catch(err => {
+    //         console.log("Erroe in db Connection");
+    //         console.log(err.message);
+    //     });
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -58,6 +71,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.currentUser = req.user;
+
     next();
 });
 
@@ -75,7 +89,9 @@ app.get('/', (req, res) => {
 app.use(productRoute);
 app.use(authRoute);
 app.use(cartRoute);
+app.use(retailerRoute); //@
+app.use(profileRoute); //@
 
 app.listen(process.env.PORT || 3000, (req, res) => {
-    console.log("COnnected to server Port 3000");
-})
+    console.log("Connected to server Port 3000");
+});

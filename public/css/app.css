@@ -1,3 +1,8 @@
+body {
+    background: rgb(156, 228, 233);
+    background: radial-gradient(circle, rgba(156, 228, 233, 1) 0%, rgba(255, 238, 242, 1) 100%);
+}
+
 .card img {
     padding: 20px;
     height: 220px;
@@ -12,10 +17,34 @@
     padding: 5px;
 }
 
-a i {
+.social-icons a i {
     width: 30px;
+    color: white;
 }
 
-a i:hover {
+.social-icons a i:hover {
     transform: scale(2);
+}
+
+.list-group a {
+    text-decoration: none;
+}
+
+#home {
+    background-color: #868e93;
+    color: black;
+    font-weight: 900;
+}
+
+#home a button {
+    margin: auto;
+}
+
+#home button {
+    margin: auto;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background-color: #227c9d;
+    color: #e8eddf;
+    border-radius: 5px;
 }

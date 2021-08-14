@@ -8,45 +8,63 @@
                 <h4 class="display-4">My Cart</h4>
                 <div class="row">
                     <div class="col-lg-8">
-                        <%for(let x of cart) { %>
+                        <% cart.sort() %>
+                            <%for(let x of cart) { %>
+                                <div class="card mb-3" style="max-width: 950px;">
+                                    <div class="row g-0">
 
+                                        <div class="col-md-4 ">
+                                            <img style="max-width: 280px;" src="<%=  x.pId.image%> " alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2 class="card-title">
+                                                <%= x.pId.title%>
+                                            </h2>
+                                            <div class="card-body">
 
-                            <div class="card mb-3" style="max-width: 950px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4 ">
-                                        <img style="max-width: 280px;" src="<%=  x.image%> " alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <%= x.title%>
-                                            </h5>
-                                            <p class="card-text m-2">
-                                                <%=  x.desc%>
-                                            </p>
-                                            <form action="/user/<%=currentUser._id%>/cart/<%= x._id %>?_method=DELETE  " method="POST"><button class="btn btn-small btn-danger">Remove</button></form>
+                                                <p class="card-text m-2">
+                                                    <%=  (x.pId.desc).substring(0,90)%>...
+                                                </p>
+                                                <div class="m-5 ">
+                                                    <form action="/user/<%=currentUser._id%>/cart/<%= x.pId._id %>?_method=DELETE" class="d-inline" method="POST"><button class="btn btn-small btn-danger ">Remove</button>
+
+                                                    </form>
+                                                    <a href="/products/<%=x.pId._id%>"><button class="btn btn-small btn-info ">View</button></a>
+                                                    <h6 class=" fw-light m-2">Quantity:
+                                                        <%= x.Quantity %>
+                                                    </h6>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%}%>
+                                <%}%>
                     </div>
-                    <div class="col-lg-4">
-                        <h6 class="display-6">Products</h6>
-                        <% totalAmount=0 %>
-                            <ul class="list-group ">
-                                <% for(let x of cart) {%>
-                                    <li class="list-group-item">
-                                        <%= x.name %> - <strong>&#8377; </strong>
-                                            <%= x.price %>
-                                    </li>
-                                    <% totalAmount+=x.price %>
+                    <% if(cart.length>0){%>
+                        <div class="col-lg-4">
+                            <h6 class="display-6">Products</h6>
+                            <% totalAmount=0 %>
+                                <ul class="list-group ">
+                                    <% for(let x of cart) {%>
+                                        <li class="list-group-item">
+                                            <%= x.pId.name %> - <strong>$</strong>
+                                                <%= x.pId.price %> X
+                                                    <%=x.Quantity%>
+                                        </li>
+                                        <% totalAmount+=x.pId.price*x.Quantity %>
 
-                                        <% } %>
-                            </ul>
-                            <p><strong>Total Amount : &#8377; <%= totalAmount %> </strong></p>
-                            <a href="/payment/cart"><button class="btn btn-success">Proceed to Payment</button></a>
-                    </div>
+                                            <% } %>
+                                </ul>
+
+                                <p><strong>Total Amount : $ <%= totalAmount %> </strong></p>
+                                <a href="/payment/cart"><button class="btn btn-success">Proceed to Payment</button></a>
+                                <% }else{%>
+                                    <div style="height: 65vh; text-align: center;">
+                                        <p>Your Cart is empty!! <a href="/products">Let's Explore</a></p>
+                                        <img height="90%" width="60%" src="https://images.unsplash.com/photo-1601598505513-7489a6272d2a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZW1wdHklMjBjYXJ0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+                                    </div>
+                                    <%}%>
+                        </div>
                 </div>
         </div>
         <%- include('../../partials/footer') %>

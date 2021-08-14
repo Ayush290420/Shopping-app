@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const product = require('../models/product');
 const review = require('../models/review');
+const User = require('../models/user');
 const { isLoggedIn } = require('../middleware');
 
 
@@ -16,6 +17,9 @@ router.get('/products', async(req, res) => {
     }
 });
 
+
+
+
 router.get('/products/new', isLoggedIn, (req, res) => {
 
     res.render('products/new.ejs');
@@ -24,10 +28,16 @@ router.get('/products/new', isLoggedIn, (req, res) => {
 
 router.post('/products', async(req, res) => {
     try {
-        console.log(req.body.product);
-        await product.create(req.body.product);
+        // console.log(req.body.product);
+        // await product.create(req.body.product);
+        const Product = new product({
+            ...req.body.product,
+            retailer: req.user.id
+        });
+
+        await Product.save();
         req.flash('success', 'Product Created!!');
-        res.redirect('/products');
+        res.redirect(`/retailer/${req.user._id}`);
     } catch (e) {
         console.log(e.message);
         req.flash('error', 'Cannot create product!!');
@@ -47,25 +57,30 @@ router.get('/products/:id', async(req, res) => {
     }
 });
 
-router.get('/products/:id/edit', isLoggedIn, async(req, res) => {
-    const editProduct = await product.findById(req.params.id);
-    res.render('products/edit.ejs', { editProduct });
-});
+// router.get('/products/:id/edit', isLoggedIn, async(req, res) => {
+//     const editProduct = await product.findById(req.params.id);
+//     res.render('products/edit.ejs', { editProduct });
+// });
 
-router.patch('/products/:id', isLoggedIn, async(req, res) => {
+// router.patch('/products/:id', isLoggedIn, async(req, res) => {
 
-    await product.findByIdAndUpdate(req.params.id, req.body.product);
-    req.flash('success', 'Updated Successfully!!');
-    res.redirect(`/products/${req.params.id}`);
-});
+//     await product.findByIdAndUpdate(req.params.id, req.body.product);
+//     req.flash('success', 'Updated Successfully!!');
+//     res.redirect(`/products/${req.params.id}`);
+// });
 
-router.delete('/products/:id', isLoggedIn, async(req, res) => {
+// router.delete('/products/:id', isLoggedIn, async(req, res) => {
 
-    await product.findByIdAndDelete(req.params.id);
-    res.redirect('/products');
-});
+//     await product.findByIdAndDelete(req.params.id);
+//     res.redirect('/products');
+// });
 
 //
+
+router.delete('/products/review/:id', async(req, res) => { //@
+    await review.findByIdAndDelete(req.params.id);
+    res.redirect('/products');
+});
 
 router.post('/products/:id/reviews', isLoggedIn, async(req, res) => {
     const Product = await product.findById(req.params.id);

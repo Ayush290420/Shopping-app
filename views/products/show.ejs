@@ -11,6 +11,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= oneProduct.name %>
+
                                 </h5>
                                 <h5 class="card-title">$
                                     <%= oneProduct.price %>
@@ -18,12 +19,28 @@
                                 <p class="card-text">
                                     <%= oneProduct.desc %>
                                 </p>
-                                <a href="" class="btn btn-success ">Buy</a>
-                                <form action="/user/<%= oneProduct._id %>/add" method="POST"> <button class="btn btn-info">Add to Cart</button></form>
-                                <a href="/products/<%= oneProduct._id %>/edit " class="btn btn-warning">Edit</a>
-                                <div class="m-3 ">
-                                    <form action="/products/<%=oneProduct._id%>?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form>
-                                </div>
+                                <!-- <a href="" class="btn btn-success ">Buy</a> -->
+                                <% if(currentUser){%>
+                                    <% let flag=false;
+                                let qty;
+                                for(let x of currentUser.cart){
+                                            if(String(oneProduct._id)==String(x.pId)){
+                                                flag=true;
+                                               qty=x.Quantity
+                                                break;
+                                            }
+                                        }%>
+                                        <% if(flag){%>
+                                            <h6 class=" fw-light m-2">Qnty: <input type="number" placeholder="<%=qty%> " name="Quantity" id="Quantity" disabled></h6>
+                                            <button class="btn btn-info" disabled>Add to Cart</button>
+                                            <h6 class=" fw-light m-2">(Already added to the cart.)</h6>
+                                            <% }else{%>
+                                                <form action="/user/<%= oneProduct._id %>/add" method="POST">
+                                                    <h6 class=" fw-light m-2">Qnty: <input type="number" min="1" max="10" value="1" name="Quantity" id="Quantity"></h6>
+                                                    <button class="btn btn-info">Add to Cart</button></form>
+                                                <% } %>
+                                                    <% } %>
+
 
                             </div>
                         </div>
@@ -74,17 +91,34 @@
                                         Rated:
                                         <%= x.rating%> stars
                                     </p>
-                                    <div class="text-capitalize fw-light" style="color: gray;">
-                                        <strong>By <%= x.user %></strong>
-                                    </div>
-                                    <div class="card-body mb-3">
+                                    <%  if((currentUser) && (x.user===currentUser.username)){%>
+                                        <div class="text-capitalize fw-light" style="color: gray;">
+                                            <strong>By You</strong>
+                                        </div>
+                                        <div class="card-body mb-3">
 
-                                        <p class="text-start">
-                                            Review:
-                                            <%= x.comment%>
-                                        </p>
+                                            <p class="text-start">
+                                                Review:
+                                                <%= x.comment%>
 
-                                    </div>
+                                                    <form method="POST" action="/products/review/<%=x._id%>?_method=DELETE "><button class="text-end btn-danger">Delete</button></form>
+
+                                            </p>
+
+                                        </div>
+                                        <% }else{%>
+                                            <div class="text-capitalize fw-light" style="color: gray;">
+                                                <strong>By <%= x.user %></strong>
+                                            </div>
+                                            <div class="card-body mb-3">
+
+                                                <p class="text-start">
+                                                    Review:
+                                                    <%= x.comment%>
+                                                </p>
+
+                                            </div>
+                                            <% }%>
                                 </div>
                                 </p>
                                 <% } %>
@@ -93,4 +127,5 @@
 
                 </div>
         </div>
+
         <%- include('../../partials/footer') %>

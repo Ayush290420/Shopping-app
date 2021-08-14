@@ -1,5 +1,42 @@
 <%- include("../partials/header") %>
     <%- include("../partials/navbar") %>
+        <%- include("../partials/carousel") %>
 
-        <a href="/products">Products</a>
-        <%- include("../partials/footer") %>
+
+            <div id="home">
+                <p class="p-5">E-commerce has transformed the way business is done in India. The Indian E-commerce market is expected to grow to US$ 200 billion by 2026 from US$ 38.5 billion as of 2017. Much of the growth for the industry has been triggered by an increase
+                    in internet and smartphone penetrationE-commerce is revolutionizing the way we all shop in India. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click?
+                    Not only mobiles. Shopping Cart houses everything you can possibly imagine, from trending electronics like laptops, tablets, smartphones, and mobile accessories to in-vogue fashion staples like shoes, clothing and lifestyle accessories;
+                    from modern furniture like sofa sets, dining tables, and wardrobes to appliances that make your life easy like washing machines, TVs, ACs, mixer grinder juicers and other time-saving kitchen and small appliances; from home furnishings
+                    like cushion covers, mattresses and bedsheets to toys and musical instruments, we got them all covered. You name it, and you can stay assured about finding them all here. For those of you with erratic working hours, Shopping Cart is
+                    your best bet. Shop in your PJs, at night or in the wee hours of the morning. This e-commerce never shuts down.
+
+                    <br>
+                    <a href="/products"> <button class="btn-lg">View</button>
+                    </a>
+                </p>
+            </div>
+            <h6 class="display-6 p-2 m-2">Some Top Products for You</h6>
+            <%- include("../partials/carousel2") %>
+                <div>
+                    <span class="m-2 p-3 fw-bolder">Brand Directory:-</span>
+                    <p class="p-3">
+                        MOBILES: iPhone 12 | iPhone 12 Pro | Vivo Y91 | F15Oppo | A31Samsung | A31Realme | Redmi A5<br> LAPTOPS: Apple Laptops | Acer Laptops | Lenovo Laptops | Dell Laptops | Asus Laptops<br>FOOTWEAR: Shoes Adidas | Shoes Reebok | Shoes<br>WATCHES:
+                        Casino | Fastrack | Titan | Sonata Nike | Shoes Puma
+                    </p>
+                </div>
+                <hr class="my-2">
+                <% if(!currentUser){%>
+                    <div class="text-center">
+                        <a href="/login"><button class="btn btn-warning ">Log in</button></a>
+                        <p>New user ?<a href="/register"> Start Here</a></p>
+                    </div>
+                    <hr class="my-2">
+                    <% }else{%>
+                        <div class="text-center">
+                            <a href="/profile"><button class="btn btn-primary m-1">Profile</button></a>
+                            <p>Want to Edit Details?</p>
+                        </div>
+                        <hr class="my-2">
+                        <% } %>
+                            <%- include("../partials/footer") %>
