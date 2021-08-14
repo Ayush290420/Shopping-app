@@ -16,7 +16,7 @@ const User = require('./models/user');
 
 
 //env key is used in place of connect url
-mongoose.connect('mongodb://localhost:27017/shop-APP', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(() => {
         console.log("Connected to database");
     })
     .catch(err => {
