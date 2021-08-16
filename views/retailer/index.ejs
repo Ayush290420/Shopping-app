@@ -27,6 +27,12 @@
                         </div>
                         <%  }%>
                 </div>
+                <% if(products.length==0){%>
+                    <div style="height: 65vh; text-align: center; margin: 2vh;">
+                        <p>Let's add some new products <a href="../products/new">Add</a></p>
+                        <img height="90%" width="70%" src="https://images.unsplash.com/photo-1417816491410-d61e1546e539?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d2FyZWhvdXNlJTIwZW1wdHl8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+                    </div>
+                    <% } %>
 
         </div>
 

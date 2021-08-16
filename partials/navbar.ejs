@@ -11,49 +11,38 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
-
-                <% if(!currentUser) {%>
-                    <li class="nav-item">
+                <li class="nav-item">
+                    <% if(!currentUser) {%>
                         <a class="nav-link active" href="/products">Products</a>
-
+                        <% } else{%>
+                            <% if(currentUser.userType=='retailer'){ %>
+                                <a class="nav-link active" href="/retailer/<%=currentUser._id%> ">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/products/new" tabindex="-1" aria-disabled="true">New</a>
+                </li>
+                <% }else {%>
+                    <a class="nav-link active" href="/products">Products</a>
                     </li>
+                    <%}  %>
+                        <% } %>
             </ul>
             <div class="navbar-nav ml-auto">
-                <a href="/login" class="nav-link active float-end">Login   <i class=" fas fa-user "></i></a>
+                <% if(!currentUser){ %>
+                    <a href="/login" class="nav-link active">Login   <i class="fas fa-user"></i></a>
+                    <% } else{%>
+
+                        <a class="nav-link active text-capitalize">Hello <%=currentUser.username %> </a>
+
+                        <% if(currentUser.userType=='customer'){ %>
+                            <a href="/user/<%= currentUser._id %>/cart " class="nav-link active"><i class="fas fa-shopping-cart"></i></a>
+                            <sup><span class="badge bg-secondary"><%= currentUser.cart.length %></span></sup>
+                            <% } %>
+
+                                <a href="/logout" class="nav-link active">Logout </a><a class="nav-link active" href="/profile"><i class="far fa-user"></i></a>
+                                <% } %>
+
             </div>
-            <% } else{%>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                    <% if(currentUser.userType=='retailer'){ %>
-
-                        <li class="nav-item ">
-                            <a class="nav-link active " href="/retailer/<%=currentUser._id%> ">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="../products/new" tabindex="-1" aria-disabled="true">New</a>
-                        </li>
-
-
-                        <% }else {%>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/products">Products</a>
-                            </li>
-                            <div class="navbar-nav ml-auto">
-                                <a href="/user/<%= currentUser._id %>/cart " class="nav-link active"><i class="fas fa-shopping-cart"></i></a>
-                                <sup><span class="badge bg-secondary"><%= currentUser.cart.length %></span></sup>
-                            </div>
-
-                            <%}  %>
-                </ul>
-                <div class="navbar-nav ml-auto float-end">
-                    <a href="/login" class="nav-link active text-capitalize">Hello <%=currentUser.username %> </a>
-
-
-
-                    <a href="/logout" class="nav-link active">Logout </a><a class="nav-link active" href="/profile"><i class="far fa-user"></i></a>
-                </div>
-                <% } %>
-
         </div>
         <!-- to  here -->
 
