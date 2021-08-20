@@ -12,8 +12,10 @@
                     your best bet. Shop in your PJs, at night or in the wee hours of the morning. This e-commerce never shuts down.
 
                     <br>
-                    <a href="/products"> <button class="btn-lg">View</button>
-                    </a>
+                    <% if(!currentUser){%>
+                        <a href="/products"> <button class="btn-lg">View</button>
+                        </a>
+                        <%} %>
                 </p>
             </div>
             <h6 class="display-6 p-2 m-2">Some Top Products for You</h6>
@@ -22,7 +24,7 @@
                     <span class="m-2 p-3 fw-bolder">Brand Directory:-</span>
                     <p class="p-3">
                         MOBILES: iPhone 12 | iPhone 12 Pro | Vivo Y91 | F15Oppo | A31Samsung | A31Realme | Redmi A5<br> LAPTOPS: Apple Laptops | Acer Laptops | Lenovo Laptops | Dell Laptops | Asus Laptops<br>FOOTWEAR: Shoes Adidas | Shoes Reebok | Shoes<br>WATCHES:
-                        Casino | Fastrack | Titan | Sonata Nike | Shoes Puma
+                        Casino | Fastrack | Titan | Sonata
                     </p>
                 </div>
                 <hr class="my-2">
